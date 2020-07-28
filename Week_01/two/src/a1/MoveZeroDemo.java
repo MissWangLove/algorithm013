@@ -20,11 +20,22 @@ public class MoveZeroDemo {
 
     /**
      * 两种解题思路
-     * 1. 在一个数组，用来拷贝。时间复杂度为O(n) - 但是不符合题意
-     * 2. 借鉴第1种思路： 只不过不用数组，在原数组上操作，只要保证前面的元素不为0，记住不为0的元素个数就好
+     * 1. 加一个数组，判断复制，记录非0或者0的个数，都可以，最后填补0  时间复杂度为O（n）
+     * 2. 利用上一个思路，主需要记录0的个数，无需额外的数组开支
      */
     public static void main(String[] args) {
         int[] nums = {0,1,0,3,12};
+        int zeroNum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                zeroNum ++;
+            } else if (zeroNum > 0) {
+                nums[i - zeroNum] = nums[i];
+                nums[i] = 0;
+            }
+        }
+
+        printArr(nums);
 
     }
 
