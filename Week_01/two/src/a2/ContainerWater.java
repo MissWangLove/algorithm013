@@ -11,6 +11,11 @@ public class ContainerWater {
      * 说明：你不能倾斜容器，且 n 的值至少为 2。
      */
 
+    /**
+     * 思路：
+     * 1. 暴力求解法： 双层for循环来枚举每一种情况，计算最大面积
+     * 2. 左右夹逼法来计算，移动小的指针
+     */
 
     public static void main(String[] args) {
         int[] arr = {1,8,6,2,5,4,8,3,7};
@@ -24,7 +29,14 @@ public class ContainerWater {
      * @return
      */
     public static int maxArea(int[] height) {
-       return 0;
+        int result = 0;
+        // 左右夹逼法的准则是指针的移动
+        for (int i = 0, j = height.length - 1; i < j;) {
+            int minHeight = height[i] > height[j] ? height[j --] : height[i ++];
+            int area = minHeight * (j - i + 1);
+            result = Math.max(area, result);
+        }
+       return result;
     }
 
     /**
@@ -33,6 +45,13 @@ public class ContainerWater {
      * @return
      */
     /*public static int maxArea(int[] height) {
-
+        int result = 0;
+        for (int i = 0; i < height.length - 1; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                int area = (j - i) * Math.min(height[i], height[j]);
+                result = result > area ? result : area;
+            }
+        }
+        return result;
     }*/
 }
