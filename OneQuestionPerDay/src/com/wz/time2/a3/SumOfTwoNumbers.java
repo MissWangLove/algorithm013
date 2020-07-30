@@ -1,6 +1,7 @@
 package com.wz.time2.a3;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -18,6 +19,12 @@ public class SumOfTwoNumbers {
      * 所以返回 [0, 1]
      */
 
+    /**
+     * 第二遍，拿到题，直接看要求，每一种输入只会对应一种答案，所以相对简单
+     * 1. 暴力求解，直接双层for循环暴力求解，简单直接明了
+     * 2. 利用哈希表，一层循环，如何做呢？遍历的时候利用target - 当前遍历的值获取另一个值，判断在哈希表中是否存在
+     */
+
 
 
     public static void main(String[] args) {
@@ -33,7 +40,13 @@ public class SumOfTwoNumbers {
      * @return
      */
     public static int[] twoSum(int[] nums, int target) {
-
+        Map<Integer, Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[]{map.get(target - nums[i]), i};
+            }
+            map.put(nums[i], i);
+        }
         return new int[0];
     }
 
