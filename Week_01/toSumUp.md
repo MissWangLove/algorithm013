@@ -12,7 +12,7 @@
 - https://github.com/MissWangLove/algorithm013/blob/master/OneQuestionPerDay/README.md （每日一道题的题目思考和总结）
 - https://github.com/MissWangLove/algorithm013/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.xmind （思维导图的总结）
 
-### 部分作业：
+### 部分作业（部分作业在每日一练中，这里就不复制粘贴了）：
 
 对于Queue和Priority Queue分析：
 
