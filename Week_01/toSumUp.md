@@ -6,11 +6,11 @@
 说说干了啥把！前三天看了第三节课，然后实战了三个，也就是week_01的内容，不过只练了三道，之后基本每天一道算法题，也就是刷题狂魔组中的练习题，我
 总感觉这个好，因为**每天都有明确的目标**，看视频没有非常明确的目标，果然目标更加明确，习惯才会得以形成，思想才会变成实践。
 
-附上在做题过程中的总结：
+附上在做题过程中的总结（对于题目来说，都是刷了两遍）：
 
-- https://github.com/MissWangLove/algorithm013/blob/master/Week_01/README.md
-- https://github.com/MissWangLove/algorithm013/blob/master/OneQuestionPerDay/README.md
-- https://github.com/MissWangLove/algorithm013/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.xmind
+- https://github.com/MissWangLove/algorithm013/blob/master/Week_01/README.md （第一周实践的一些题目思考以及总结，这周的少）
+- https://github.com/MissWangLove/algorithm013/blob/master/OneQuestionPerDay/README.md （每日一道题的题目思考和总结）
+- https://github.com/MissWangLove/algorithm013/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.xmind （思维导图的总结）
 
 ### 部分作业：
 
