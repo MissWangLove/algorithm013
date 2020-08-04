@@ -32,7 +32,7 @@ public class LetterVariants {
     }
 
     /**
-     * 数组排序实现
+     * 数组排序实现，时间复杂度是 O(nlogn)
      * @param s
      * @param t
      * @return
