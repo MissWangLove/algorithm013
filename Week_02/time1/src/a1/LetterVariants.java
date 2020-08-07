@@ -38,6 +38,8 @@ public class LetterVariants {
 
     /**
      * 数组实现
+     * 时间复杂度为 O(n)
+     * 空间复杂度为 O(1), 因为是固定的26
      * @param s
      * @param t
      * @return
@@ -62,6 +64,8 @@ public class LetterVariants {
 
     /**
      * 排序,对比数组，这里的时间复杂度就是排序的时间复杂度 + 比较的时间复杂度
+     * 时间复杂度是：O(n * log n)
+     * 空间复杂度是： O(n),因为利用了额外的数组
      * @param s
      * @param t
      * @return
@@ -81,6 +85,8 @@ public class LetterVariants {
     /**
      * 使用一个map来存储一个字符串中字母和字母出现的次数，然后遍历另一个字母串的时候先减少map的次数，
      * 当次数是0的时候移除，最后map为空说明是字母异位词
+     * 时间复杂度为： O(n)
+     * 空间复杂度为： O(n)
      * @param s
      * @param t
      * @return

@@ -41,6 +41,8 @@ public class LetterDysphoricGrouping {
 
     /**
      * 计数法
+     * 时间复杂度为 O(n^2) 双层for循环， strs.length一次， 转换成数组一次
+     * 空间复杂度为 O(n) map的声明，数组的声明时固定的长度O(1)
      */
     public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
@@ -65,6 +67,8 @@ public class LetterDysphoricGrouping {
 
     /**
      * map解决，关键在于map的声明
+     * 时间复杂度： O(n^2 * log n)  排序是 n * log n, 加上外层的for循环 n
+     * 空间复杂度： O(n)
      * @param strs
      * @return
      */

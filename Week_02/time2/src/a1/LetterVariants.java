@@ -32,7 +32,9 @@ public class LetterVariants {
     }
 
     /**
-     * 数组排序实现，时间复杂度是 O(nlogn)
+     * 数组排序实现，
+     * 时间复杂度是 O(nlogn)
+     * 空间复杂度就是 O(n)
      * @param s
      * @param t
      * @return
@@ -50,6 +52,8 @@ public class LetterVariants {
 
     /**
      * 26长度数组实现
+     * 时间复杂度就是 O(n)
+     * 空间复杂度是   O(1)
      * @param s
      * @param t
      * @return
