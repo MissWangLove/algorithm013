@@ -4,8 +4,13 @@
 
 学习算法的第二周
 
+#### 链接
 
+每日一题总结：https://github.com/WangZhiLove/algorithm013/blob/master/OneQuestionPerDay/README.md
+第二周学习内容总结：https://github.com/WangZhiLove/algorithm013/blob/master/Week_02/README.md
 
+第二周的部分homework在每日一题中，总的来说第二周比第一周做题的时候要舒服很多，虽然有时候还是做不出来，但是最起码思路等等比以前考虑的要全面，感觉
+很好，算是进步呀。但是这周的视频没有看完，还得继续加油。
 
 ### homework
 
