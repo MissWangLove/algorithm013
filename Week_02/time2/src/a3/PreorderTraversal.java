@@ -1,5 +1,6 @@
 package a3;
 
+import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -50,23 +51,44 @@ public class PreorderTraversal {
      * 时间复杂度为 O(n) 其实不管哪种方法，每个结点都访问且仅访问一次
      * 空间复杂度为 O(n)
      */
-    public static List<Integer> preorderTraversal(TreeNode root) {
+    /*public static List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            result.add(pop.val);
+            if (pop.right != null) {
+                stack.push(pop.right);
+            }
+            if (pop.left != null) {
+                stack.push(pop.left);
+            }
+        }
 
         return result;
-    }
+    }*/
 
     /**
      * 递归
      */
-    /*public static List<Integer> preorderTraversal(TreeNode root) {
-
+    public static List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        addlist(root, result);
+        return result;
     }
 
     public static void addlist(TreeNode treeNode, List<Integer> list) {
-
-    }*/
+        if (treeNode != null) {
+            list.add(treeNode.val);
+            if (treeNode.left != null) {
+                addlist(treeNode.left, list);
+            }
+            if (treeNode.right != null) {
+                addlist(treeNode.right, list);
+            }
+        }
+    }
 
 
 
