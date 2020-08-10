@@ -1,6 +1,5 @@
 package com.wz.time2.a14;
 
-import javax.swing.tree.TreeNode;
 import java.util.*;
 
 public class PostOrderTraversal {
