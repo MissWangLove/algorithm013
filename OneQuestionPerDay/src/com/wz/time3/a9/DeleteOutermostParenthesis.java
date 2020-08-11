@@ -1,4 +1,4 @@
-package com.wz.time2.a9;
+package com.wz.time3.a9;
 
 public class DeleteOutermostParenthesis {
 
@@ -41,32 +41,37 @@ public class DeleteOutermostParenthesis {
      */
 
     /**
-     * 1. 依稀记得自己蠢蠢的方法，哎，忘记自己拿蠢蠢的写法吧
-     * 2. 最简单的写法，计数器写法，遇到（加1，遇到）减1，只要对称的时候计数器就是0，在计数器大于等于1的时候拼接字符串，就可以了。
-     *
+     * 第三遍
+     * 1. 计数器解法，就是统计括号出现的次数，出现（加1，出现）的时候减1，计数器放在中间进行判断，否则永远也凑不成一对，因为减1之后就等于1，不满足条件
+     * 2. 利用栈结构，但是效率差，不考虑，记住第一种方法就好。
      */
 
 
 
     public static void main(String[] args) {
         System.out.println(removeOuterParentheses("(())"));
+        System.out.println(removeOuterParentheses("()()"));
+        System.out.println(removeOuterParentheses("(()())(())"));
+        System.out.println(removeOuterParentheses("(()())(())(()(()))"));
     }
 
     /**
      * 计数器解法
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
      */
     public static String removeOuterParentheses(String S) {
         StringBuilder sb = new StringBuilder("");
-        int count = 0;
+        int num = 0;
         for (char c : S.toCharArray()) {
-            if (c == ')') {
-                count --;
+            if (c == '(') {
+                num ++;
             }
-            if (count >= 1) {
+            if (num > 1) {
                 sb.append(c);
             }
-            if (c == '(') {
-                count ++;
+            if (c == ')') {
+                num --;
             }
         }
         return sb.toString();
@@ -78,26 +83,6 @@ public class DeleteOutermostParenthesis {
      * @return
      */
    /* public static String removeOuterParentheses(String S) {
-        StringBuilder result = new StringBuilder();
-        LinkedList<Character> list = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < S.length(); i++) {
-            char c = S.charAt(i);
-            list.add(c);
-            if (c == ')') {
-                stack.pop();
-                if (stack.isEmpty()) {
-                    list.pollFirst();
-                    list.pollLast();
-                    for (Character character : list) {
-                        result.append(character);
-                    }
-                    list.clear();
-                }
-            } else {
-                stack.push(c);
-            }
-        }
-        return result.toString();
+
     }*/
 }
