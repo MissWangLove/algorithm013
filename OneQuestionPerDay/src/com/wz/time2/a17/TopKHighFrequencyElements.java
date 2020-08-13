@@ -1,9 +1,6 @@
-package com.wz.time1.a17;
+package com.wz.time2.a17;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class TopKHighFrequencyElements {
     /**
@@ -44,74 +41,54 @@ public class TopKHighFrequencyElements {
     }
 
     /**
-     * 把List换成大顶堆试试
-     * 时间复杂度是 O(n)，for循环，小顶堆实现的时候插入和删除的时间复杂度是O(log n)
+     * 利用大顶堆来做
+     * 时间复杂度为 O(n)
      * 空间复杂度是 O(n)
      */
     public static int[] topKFrequent(int[] nums, int k) {
         int[] result = new int[k];
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            // 优化map赋值
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
-            /// 上面的写法优化下面这种判断
-            /*if (map.containsKey(nums[i])) {
-                Integer value = map.get(nums[i]);
-                map.put(nums[i], ++ value);
-            } else {
-                map.put(nums[i], 1);
-            }*/
         }
-        /// 这里使用了大顶堆,如果使用小顶堆，可以再次简化一下
-        /*PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((o1, o2) -> o1.getValue() - o2.getValue());
-        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
-            priorityQueue.add(integerIntegerEntry);
-        }
-        int index = 0;
-        while (index < k) {
-            result[index ++] = priorityQueue.poll().getKey();
-        }*/
-        // 小顶堆实现
-        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue));
+        // 大顶堆是升序
+        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((Comparator.comparingInt(Map.Entry::getValue)));
         for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
             priorityQueue.add(integerIntegerEntry);
             if (priorityQueue.size() > k) {
                 priorityQueue.poll();
             }
         }
-        int index = 0;
+        int num = 0;
         while (!priorityQueue.isEmpty()) {
-            result[index ++] = priorityQueue.poll().getKey();
+            result[num ++] = priorityQueue.poll().getKey();
         }
         return result;
     }
 
     /**
-     * Map + List排序
-     * 时间复杂度为O(n * log n)
-     * 空间复杂度为O(n)
-     *
+     * 先使用Map的做法
+     * 时间复杂度为 O(n * log n)
+     * 空间复杂度为 O(n)   list套map还是O(n)吗？
      */
+    /// 不同的解法
     /*public static int[] topKFrequent(int[] nums, int k) {
         int[] result = new int[k];
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(nums[i])) {
-                Integer value = map.get(nums[i]);
-                map.put(nums[i], ++ value);
-            } else {
-                map.put(nums[i], 1);
-            }
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
+            list.add(integerIntegerEntry);
+        }
         Collections.sort(list, (o1, o2) -> o2.getValue() - o1.getValue());
-        int index = 0;
-        for (Map.Entry<Integer, Integer> integerIntegerEntry : list) {
-            if (index == result.length) {
-                break;
-            }
-            result[index ++] = integerIntegerEntry.getKey();
+        int num = 0;
+        while (num < k) {
+            result[num] = list.get(num).getKey();
+            num ++;
         }
+
         return result;
     }*/
 }
