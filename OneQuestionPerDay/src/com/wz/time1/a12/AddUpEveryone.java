@@ -56,7 +56,7 @@ public class AddUpEveryone {
 
     /**
      * 递归做法
-     * 时间复杂度是 O(n)
+     * 时间复杂度是 O(2^n)
      * 空间复杂度为 O(1)
      * @param num
      * @return

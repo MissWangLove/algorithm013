@@ -1,4 +1,4 @@
-package com.wz.time2.a12;
+package com.wz.time3.a12;
 
 public class AddUpEveryone {
 
@@ -24,31 +24,32 @@ public class AddUpEveryone {
     }
 
     /**
-     * 数学解法，9一个循环，9的倍数额外处理
-     * 时间复杂度 O(1)
-     * 空间复杂度 O(1)
-     */
-    public static int addDigits(int num) {
-        return (num - 1) % 9 + 1;
-    }
-
-    /**
-     * 递归来做
-     * 时间复杂度为 O（2^n）
-     * 空间复杂度为 O（1）
+     * 数学解法有点忘记了，其实就是归纳法 + 最小重复单元
+     * 时间复杂度和空间复杂度都是 O(1)
      */
     /*public static int addDigits(int num) {
+        return (num - 1) % 9 + 1;
+    }*/
+
+    /**
+     * 递归如何来做
+     * 时间复杂度就是 O(2^n)
+     * 空间复杂度就是 O(n)
+     */
+    public static int addDigits(int num) {
+        // 终止条件
         if (num < 10) {
             return num;
         }
-        int temp = 0;
+        // 当前层的逻辑
+        int sum = 0;
+        // 取余
         while (num != 0) {
-            temp += num % 10;
+            sum += num % 10;
             num /= 10;
         }
-        return addDigits(temp);
-    }*/
-
-
+        // 进入下层
+        return addDigits(sum);
+    }
 
 }
