@@ -52,7 +52,21 @@ public class PreorderTraversal {
      */
     public static List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-
+        if (root == null) {
+            return list;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            list.add(pop.val);
+            if (pop.right != null) {
+                stack.push(pop.right);
+            }
+            if (pop.left != null) {
+                stack.push(pop.left);
+            }
+        }
         return list;
     }
 
@@ -66,7 +80,11 @@ public class PreorderTraversal {
     }
 
     public static void addlist(TreeNode treeNode, List<Integer> list) {
-        
+        if (treeNode != null) {
+            list.add(treeNode.val);
+            addlist(treeNode.left, list);
+            addlist(treeNode.right, list);
+        }
     }*/
 
 
