@@ -43,8 +43,20 @@ public class MinimumDepth {
      * 空间复杂度就是最小深度
      */
     public static int minDepth(TreeNode root) {
-        
-        return  1;
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        int minDepth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            minDepth = Math.min(minDepth(root.left), minDepth);
+        }
+        if (root.right != null) {
+            minDepth = Math.min(minDepth(root.right), minDepth);
+        }
+        return  minDepth + 1;
     }
 }
 
