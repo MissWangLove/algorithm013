@@ -30,7 +30,12 @@ public class MaximumDepth {
      * 空间复杂度O(深度) 递归函数需要栈空间
      */
     public static int maxDepth(TreeNode root) {
-        return 0;
+        if (root == null) {
+            return 0;
+        } else {
+            return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+        }
+
     }
 }
 
