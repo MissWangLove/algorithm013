@@ -22,16 +22,15 @@ public class Combination {
      */
 
     /**
-     * 思路：
-     * 没有思路，看题解
-     * 1. 看了官方的题解，更懵逼了，认真思考，发现题解有个地方写的不明显，看了半天也不理解，要吐了
+     * 第二遍做
+     * 开始有点思路了，也可能是背的 代码吧
      */
 
     private List<List<Integer>> result = new LinkedList<>();
 
     public static void main(String[] args) {
         Combination combination = new Combination();
-        List<List<Integer>> combine = combination.combine(1, 1);
+        List<List<Integer>> combine = combination.combine(4, 2);
         for (List<Integer> list : combine) {
             for (Integer integer : list) {
                 System.out.print(integer + ", ");
@@ -45,8 +44,24 @@ public class Combination {
      * 空间复杂度是全部的组合数
      */
     public List<List<Integer>> combine(int n, int k) {
-
+        LinkedList<Integer> curr = new LinkedList<>();
+        getResult(1, n, k, curr);
         return result;
+    }
+
+    private void getResult(int first, int n, int k, LinkedList<Integer> curr) {
+        // 终止条件
+        if (curr.size() == k) {
+            result.add(new LinkedList<>(curr));
+        }
+        // 当前层逻辑
+        for (int i = first; i <= n; i++) {
+            curr.add(i);
+            // 进入下一层，i + 1很重要
+            getResult(i + 1, n, k, curr);
+            curr.removeLast();
+        }
+
     }
 
 

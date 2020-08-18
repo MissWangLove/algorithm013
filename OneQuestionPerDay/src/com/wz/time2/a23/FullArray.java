@@ -47,9 +47,31 @@ public class FullArray {
      * 时间复杂度其实就是 O(n ^ n)，至少我是这么觉得。
      */
     public List<List<Integer>> permute(int[] nums) {
+        LinkedList<Integer> curr = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int num : nums) {
+            list.add(num);
+        }
+        getResult(nums.length, list, curr);
         return result;
     }
 
-   
+    private void getResult(int length, LinkedList<Integer> nums, LinkedList<Integer> curr) {
+        // 终止条件
+        if (curr.size() == length) {
+            result.add(new LinkedList<>(curr));
+            return ;
+        }
+        // 当前层
+        for (int i = 0; i < nums.size(); i++) {
+            curr.add(nums.get(i));
+            LinkedList<Integer> list = new LinkedList<>(nums);
+            list.remove(nums.get(i));
+            // 进入下一层
+            getResult(length, list, curr);
+            curr.removeLast();
+        }
+    }
+
 
 }
