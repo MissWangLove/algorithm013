@@ -1,7 +1,6 @@
-package time2;
+package time3.a1;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class SequenceTraversal {
@@ -26,7 +25,8 @@ public class SequenceTraversal {
      */
 
     /**
-     * bfs的标准模板代码
+     * 层序遍历，就我看来不就是bfs吗？仅仅是将bfs的每一层放到一个集合而已，那是不是可以用bfs来做呢？试试
+     * 先将bfs写出来，然后变动就可以
      */
 
     public static void main(String[] args) {
@@ -55,23 +55,7 @@ public class SequenceTraversal {
      */
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        LinkedList<TreeNode> linkedList = new LinkedList<>();
-        linkedList.push(root);
-        while (!linkedList.isEmpty()) {
-            int length = linkedList.size();
-            List<Integer> list = new ArrayList<>(length);
-            for (int i = 0; i < length; i++) {
-                TreeNode pop = linkedList.pop();
-                list.add(pop.val);
-                if (pop.left != null) {
-                    linkedList.push(pop.left);
-                }
-                if (pop.right != null) {
-                    linkedList.push(pop.right);
-                }
-            }
-            result.add(list);
-        }
+
         return result;
     }
 }

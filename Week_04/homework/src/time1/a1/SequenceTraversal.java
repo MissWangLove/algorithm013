@@ -1,4 +1,4 @@
-package time3;
+package time1.a1;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -56,7 +56,26 @@ public class SequenceTraversal {
      */
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-
+        if (root == null) {
+            return result;
+        }
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        linkedList.add(root);
+        while (!linkedList.isEmpty()) {
+            int loop = linkedList.size();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < loop; i++) {
+                TreeNode treeNode = linkedList.pollFirst();
+                list.add(treeNode.val);
+                if (treeNode.left != null) {
+                    linkedList.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    linkedList.add(treeNode.right);
+                }
+            }
+            result.add(list);
+        }
         return result;
     }
 }
