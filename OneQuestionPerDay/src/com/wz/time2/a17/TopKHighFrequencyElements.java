@@ -51,7 +51,7 @@ public class TopKHighFrequencyElements {
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        // 大顶堆是升序
+        // 升序, poll的时候就可以排除最小的
         PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue = new PriorityQueue<>((Comparator.comparingInt(Map.Entry::getValue)));
         for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
             priorityQueue.add(integerIntegerEntry);
