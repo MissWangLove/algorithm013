@@ -1,6 +1,5 @@
 package time1.a2;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -45,7 +44,7 @@ public class FindMaxNumInTreeRow {
      * 这道题相对简单，使用bfs的话比较好做，其实就是标准的bfs代码就可以处理。
      * 时间复杂度和空间复杂度都是O(n)
      */
-    public static List<Integer> largestValues(TreeNode root) {
+    /*public static List<Integer> largestValues(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) {
             return result;
@@ -68,6 +67,46 @@ public class FindMaxNumInTreeRow {
             result.add(max);
         }
         return result;
+    }*/
+
+    /**
+     * 尝试用dfs去解决
+     * 顺利解决，这应该算是我第二次使用dfs解决问题，第一个是生成括号
+     * 时间复杂度和空间复杂度都是O(n)
+     */
+    public static List<Integer> largestValues(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList<>();
+        if (root == null) {
+            return result;
+        }
+        // 递归实现
+        getResult(1, result, root);
+        return result;
+    }
+
+    private static void getResult(int i, LinkedList<Integer> result, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        // 业务逻辑
+        if (result.size() < i) {
+            result.add(root.val);
+        } else {
+            if (result.get(i - 1) < root.val) {
+                result.remove(i - 1);
+                result.add(i - 1, root.val);
+            }
+        }
+
+
+        // 进入下一层
+        if (root.left != null) {
+            getResult(i + 1, result, root.left);
+        }
+        if (root.right != null) {
+            getResult(i + 1, result, root.right);
+        }
     }
 }
 
