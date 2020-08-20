@@ -44,9 +44,52 @@ public class FindMaxNumInTreeRow {
      * 这道题相对简单，使用bfs的话比较好做，其实就是标准的bfs代码就可以处理。
      * 时间复杂度和空间复杂度都是O(n)
      */
-    public static List<Integer> largestValues(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
+    /// bfs的代码
+    /*public static List<Integer> largestValues(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList<>();
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            int length = deque.size();
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < length; i++) {
+                TreeNode poll = deque.poll();
+                max = Math.max(max, poll.val);
+                if (poll.left != null) {
+                    deque.add(poll.left);
+                }
+                if (poll.right != null) {
+                    deque.add(poll.right);
+                }
+            }
+            result.add(max);
+        }
         return result;
+    }*/
+
+    /**
+     * dfs实现
+     */
+    public static List<Integer> largestValues(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList<>();
+        getResult(1, root, result);
+        return result;
+    }
+
+    private static void getResult(int index, TreeNode root, LinkedList<Integer> result) {
+        if (root == null) {
+            return ;
+        }
+        if (result.size() < index) {
+            result.add(root.val);
+        } else {
+            if(result.get(index - 1) < root.val) {
+                result.remove(index - 1);
+                result.add(index - 1, root.val);
+            }
+        }
+        getResult(index + 1, root.left, result);
+        getResult(index + 1, root.right, result);
     }
 }
 
