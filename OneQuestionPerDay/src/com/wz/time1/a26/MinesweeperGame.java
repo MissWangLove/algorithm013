@@ -79,12 +79,21 @@ public class MinesweeperGame {
     static int[] dirY = {1, 0, -1, 0, 1, -1, 1, -1};
 
     /**
+     * 使用dfs如何解决呢？
+     */
+    public static char[][] updateBoard(char[][] board, int[] click) {
+
+
+        return board;
+    }
+
+    /**
      * 看题解，优化自己的代码和多种方案解题，发现自己犯了个致命的错误，
      * 就是没有记录节点有无被访问，这个必须得有，所以以后再使用bfs的时候就按照
      * 标准模板来写，就没错。
      * 时间复杂度和空间复杂度都是 O(nm)
      */
-    public static char[][] updateBoard(char[][] board, int[] click) {
+    /*public static char[][] updateBoard(char[][] board, int[] click) {
         if (board[click[0]][click[1]] == 'M') {
             board[click[0]][click[1]] = 'X';
             return board;
@@ -126,7 +135,7 @@ public class MinesweeperGame {
             }
         }
         return board;
-    }
+    }*/
 
     /**
      * 使用bfs来实现把，感觉相对简单,
