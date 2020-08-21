@@ -74,11 +74,65 @@ public class MinesweeperGame {
             System.out.println();
         }
     }
+
+    static int[] dirX = {0, 1, 0, -1, 1, 1, -1, -1};
+    static int[] dirY = {1, 0, -1, 0, 1, -1, 1, -1};
+
+    /**
+     * 看题解，优化自己的代码和多种方案解题，发现自己犯了个致命的错误，
+     * 就是没有记录节点有无被访问，这个必须得有，所以以后再使用bfs的时候就按照
+     * 标准模板来写，就没错。
+     * 时间复杂度和空间复杂度都是 O(nm)
+     */
+    public static char[][] updateBoard(char[][] board, int[] click) {
+        if (board[click[0]][click[1]] == 'M') {
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        Deque<int[]> deque = new LinkedList<int[]>();
+        boolean[][] visit = new boolean[board.length][board[0].length];
+        deque.add(click);
+        while (!deque.isEmpty()) {
+            int length = deque.size();
+            for (int i = 0; i < length; i++) {
+                int tempNum = 0;
+                int[] pop = deque.pop();
+                int x = pop[0];
+                int y = pop[1];
+                for (int i1 = 0; i1 < 8; i1++) {
+                    int tx = x + dirX[i1];
+                    int ty = y + dirY[i1];
+                    if (tx < 0 || ty < 0 || tx >= board.length || ty >= board[0].length) {
+                        continue ;
+                    }
+                    if (board[tx][ty] == 'M') {
+                        ++ tempNum;
+                    }
+                }
+                if (tempNum == 0) {
+                    board[x][y] = 'B';
+                    for (int i1 = 0; i1 < 8; i1++) {
+                        int tx = x + dirX[i1];
+                        int ty = y + dirY[i1];
+                        if (tx < 0 || ty < 0 || tx >= board.length || ty >= board[0].length || board[tx][ty] != 'E' || visit[tx][ty] == true) {
+                            continue ;
+                        }
+                        deque.add(new int[]{tx, ty});
+                        visit[tx][ty] = true;
+                    }
+                } else {
+                    board[x][y] = (char) (tempNum + 48);
+                }
+            }
+        }
+        return board;
+    }
+
     /**
      * 使用bfs来实现把，感觉相对简单,
      * 思路没问题，就是超时了，明天看题解，然后解决
      */
-    public static char[][] updateBoard(char[][] board, int[] click) {
+    /*public static char[][] updateBoard(char[][] board, int[] click) {
         if (board[click[0]][click[1]] == 'M') {
             board[click[0]][click[1]] = 'X';
             return board;
@@ -162,7 +216,7 @@ public class MinesweeperGame {
             }
         }
         return board;
-    }
+    }*/
     /**
      * 深度遍历和广度遍历，先使用深度遍历把
      */
