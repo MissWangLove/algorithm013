@@ -1,6 +1,6 @@
 package com.wz.time3.a20;
 
-import java.util.Stack;
+import java.util.*;
 
 public class VerifyBinarySearchTree {
 
@@ -33,14 +33,36 @@ public class VerifyBinarySearchTree {
      *
      */
 
+    public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(2);
+        TreeNode treeNode1 = new TreeNode(1);
+        TreeNode treeNode2 = new TreeNode(3);
+        treeNode.left = treeNode1;
+        treeNode.right = treeNode2;
+        System.out.println(isValidBST(treeNode));
+    }
+
     /**
-     * 二叉搜索树的中序遍历是升序的，所以利用二叉搜索树的中序遍历进行判断，
-     * 记录上一个访问的结点，然后比对就好。
+     * 将二叉树中序遍历的结果放到集合中，然后存放下一个元素的时候判断是否比上一个元素大
+     * 左 - 根 - 右
      * 时间复杂度O(n)
      * 空间复杂度为O(n)
      */
     public static boolean isValidBST(TreeNode root) {
-
+        TreeNode pre = null;
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            if (pre != null && pre.val > pop.val) {
+                return false;
+            }
+            pre = pop;
+            root = pop.right;
+        }
         return true;
     }
 }
