@@ -72,16 +72,105 @@ public class MinesweeperGame {
         }
     }
 
+    static int[] xTe = {0, 0, 1, 1, -1, -1, -1, 1};
+
+    static int[] yTe = {1, -1, 0, -1, 0, 1, -1, 1};
+
     /**
-     * 看题解，优化自己的代码和多种方案解题，发现自己犯了个致命的错误，
-     * 就是没有记录节点有无被访问，这个必须得有，所以以后再使用bfs的时候就按照
-     * 标准模板来写，就没错。
-     * 时间复杂度和空间复杂度都是 O(nm)
+     * dfs如何实现
+     * dfs的代码看上取就是简单很多，让人看着舒服，相对于bfs来说
+     * 时间复杂度和空间复杂度都是 O(nm)  每个坐标点都只访问一次
      */
     public static char[][] updateBoard(char[][] board, int[] click) {
-
+        int xLength = board.length;
+        if (xLength == 0) {
+            return board;
+        }
+        int yLength = board[0].length;
+        if (board[click[0]][click[1]] == 'M') {
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        dfs(xLength, yLength, board, click[0], click[1]);
         return board;
     }
+
+    private static void dfs(int xLength, int yLength, char[][] board, int x, int y) {
+        int num = 0;
+        for (int i = 0; i < 8; i++) {
+            int tempX = x + xTe[i];
+            int tempY = y + yTe[i];
+            if (tempX >= 0 && tempY >= 0 && tempX < xLength && tempY < yLength && board[tempX][tempY] == 'M') {
+                num ++;
+            }
+        }
+        if (num > 0) {
+            board[x][y] = (char)(num + 48);
+        } else {
+            board[x][y] = 'B';
+            for (int i = 0; i < 8; i++) {
+                int tempX = x + xTe[i];
+                int tempY = y + yTe[i];
+                if (tempX >= 0 && tempY >= 0 && tempX < xLength && tempY < yLength && board[tempX][tempY] == 'E') {
+                    dfs(xLength, yLength, board, tempX, tempY);
+                }
+            }
+        }
+    }
+
+    /**
+     * 先使用bfs做出来，再考虑dfs把
+     * 时间复杂度和空间复杂度都是 O(nm)
+     */
+    /*public static char[][] updateBoard(char[][] board, int[] click) {
+        Deque<int[]> deque = new LinkedList<>();
+        int xLength = board.length;
+        if (xLength == 0) {
+            return board;
+        }
+        int yLength = board[0].length;
+        boolean[][] visited = new boolean[xLength][yLength];
+        if (board[click[0]][click[1]] == 'M') {
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        bfs(board, click,xLength, yLength, visited, deque);
+        return board;
+    }
+
+    private static void bfs(char[][] board, int[] click, int xLength, int yLength, boolean[][] visited, Deque<int[]> deque) {
+        deque.add(click);
+        while (!deque.isEmpty()) {
+            int dequeSize = deque.size();
+            for (int i = 0; i < dequeSize; i++) {
+                int[] poll = deque.poll();
+                int x = poll[0];
+                int y = poll[1];
+                int num = 0;
+                for (int i1 = 0; i1 < 8; i1++) {
+                    int tempX = x + xTe[i1];
+                    int tempY = y + yTe[i1];
+                    if (tempX >= 0 && tempY >= 0 && tempX < xLength && tempY < yLength && board[tempX][tempY] == 'M') {
+                        num ++;
+                    }
+                }
+                if (num > 0) {
+                    board[x][y] = (char)(num + 48);
+                } else {
+                    board[x][y] = 'B';
+                    for (int i1 = 0; i1 < 8; i1++) {
+                        int tempX = x + xTe[i1];
+                        int tempY = y + yTe[i1];
+                        if (tempX >= 0 && tempY >= 0 && tempX < xLength && tempY < yLength && board[tempX][tempY] == 'E' &&!visited[tempX][tempY]) {
+                            deque.add(new int[]{tempX, tempY});
+                            visited[tempX][tempY] = true;
+                        }
+                    }
+                }
+            }
+
+        }
+    }*/
 
 }
 
