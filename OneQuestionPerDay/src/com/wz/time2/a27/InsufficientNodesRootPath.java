@@ -61,6 +61,11 @@ public class InsufficientNodesRootPath {
         }
     }
 
+    /**
+     * dfs
+     * 时间复杂度为O（n）
+     * 空间复杂度为O（1）
+     */
     public static TreeNode sufficientSubset(TreeNode root, int limit) {
         if (root == null) {
             return root;
@@ -74,7 +79,24 @@ public class InsufficientNodesRootPath {
 
     private static boolean dfs(TreeNode treeNode, int limit, int num) {
         // 终止条件
-        return false;
+        if (treeNode.left == null && treeNode.right == null) {
+            return num < limit;
+        }
+        boolean left = true;
+        boolean right = true;
+        if (treeNode.left != null) {
+            left = dfs(treeNode.left, limit, num + treeNode.left.val);
+        }
+        if (treeNode.right != null) {
+            right = dfs(treeNode.right, limit, num + treeNode.right.val);
+        }
+        if (left) {
+            treeNode.left = null;
+        }
+        if (right) {
+            treeNode.right = null;
+        }
+        return left && right;
     }
 }
 
