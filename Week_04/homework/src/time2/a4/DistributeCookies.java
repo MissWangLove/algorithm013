@@ -39,10 +39,22 @@ public class DistributeCookies {
 
     /**
      * 思路：
-     * 直接排序，然后一个一个比对就好，单层循环，使用while循环就好
+     * 直接排序，然后一个一个比对就好，单层循环，使用while循环就好，时间复杂度就是排序的时间复杂度
+     * 时间消耗在排序上 O(n log n)
      */
     public int findContentChildren(int[] g, int[] s) {
         int result = 0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int gIndex = 0;
+        int sIndex = 0;
+        while (gIndex < g.length && sIndex < s.length) {
+            if (s[sIndex] >= g[gIndex]) {
+                result ++;
+                gIndex ++;
+            }
+            sIndex ++;
+        }
         return result;
     }
 }
