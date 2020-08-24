@@ -18,5 +18,5 @@ bfs和dfs做多了，发现前面学的前中后序遍历忘的差不多了，�
 
 第四周题目总结链接：https://github.com/WangZhiLove/algorithm013/blob/master/Week_04/README.md
 
-常用的代码记录：https://shimo.im/folder/jGxw6qhhkKHxWX8v
+常用的代码记录：https://shimo.im/docs/RdHhKHkpcKcc9pdk
 
