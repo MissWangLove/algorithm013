@@ -1,5 +1,8 @@
 package com.wz.time1.a28;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class JumpingGame {
 
     /**
@@ -24,7 +27,20 @@ public class JumpingGame {
 
     public static void main(String[] args) {
         // System.out.println(canJump(new int[]{2,3,1,1,4}));
-        System.out.println(canJump(new int[]{3,2,1,0,4}));
+//        System.out.println(canJump(new int[]{3,2,1,0,4}));
+        System.out.println(urlEncode("http://1.shiyuesoft.com/home-mobile","utf-8"));
+    }
+    public static String urlEncode(String value, String encoding) {
+        if (value == null) {
+            return "";
+        }
+        try {
+            String encoded = URLEncoder.encode(value, encoding);
+            return encoded.replace("+", "%20").replace("*", "%2A")
+                    .replace("~", "%7E").replace("/", "%2F");
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalArgumentException("FailedToEncodeUri", e);
+        }
     }
 
     /**
