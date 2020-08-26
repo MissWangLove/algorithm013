@@ -40,16 +40,26 @@ public class Combination {
     }
 
     /**
+     * 有点遗忘，想不起来，直接看第二遍做的，递归解法
      * 时间复杂度就是 k * 全部的组合数
      * 空间复杂度是全部的组合数
      */
     public List<List<Integer>> combine(int n, int k) {
-
+        LinkedList<Integer> curr = new LinkedList<>();
+        getResult(1, n, k, curr);
         return result;
     }
 
     private void getResult(int first, int n, int k, LinkedList<Integer> curr) {
-
+        if (curr.size() == k) {
+            result.add(new LinkedList<>(curr));
+            return ;
+        }
+        for (int i = first; i <= n; i++) {
+            curr.add(i);
+            getResult(i + 1, n, k, curr);
+            curr.removeLast();
+        }
 
     }
 
