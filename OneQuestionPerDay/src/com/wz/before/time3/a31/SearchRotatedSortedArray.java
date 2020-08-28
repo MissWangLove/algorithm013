@@ -28,14 +28,35 @@ public class SearchRotatedSortedArray {
     }
 
     /**
-     * 看讲解，然后做，主要的判断是左边还是右边有序，找好边界，标准的微分查找
-     * 下面写个写法的思路就是根据前半部分有序和后半部分有序来分别判断，还有一个更简单的写法，
-     * 只需要判断前半部分有序，但是我觉得那种写法没有这种写法更容易理解
+     * 思路，其实就是判断那边有序，然后判断处应该在那边寻找
      * 下面的时间复杂度就是O(log n)
      * 空间复杂度是O(1)
      */
     public static int search(int[] nums, int target) {
-       
+       int left = 0;
+       int right = nums.length - 1;
+       int middle = 0;
+       while (left <= right) {
+           middle = (left + right) / 2;
+           if (nums[middle] == target) {
+               return middle;
+           } else if (nums[left] <= nums[middle]) {
+               // 左侧有序
+               if (target > nums[middle] || target < nums[left]) {
+                   left = middle + 1;
+               } else {
+                   right = middle - 1;
+               }
+           } else {
+               // 右侧有序
+                if (target < nums[middle] || target > nums[right]) {
+                    right = middle - 1;
+                } else {
+                    left = middle + 1;
+                }
+
+           }
+       }
         return -1;
     }
 }
