@@ -23,9 +23,11 @@ public class JumpingGame {
      */
 
     public static void main(String[] args) {
-        // System.out.println(canJump(new int[]{2,3,1,1,4}));
-//        System.out.println(canJump(new int[]{3,2,1,0,4}));
-        System.out.println(jump(new int[]{3,2,1}));
+         //System.out.println(canJump(new int[]{2,3,1,1,4}));
+        System.out.println(canJump(new int[]{3,2,1,0,4}));
+        System.out.println(canJump(new int[]{0,4}));
+        System.out.println(canJump(new int[]{0}));
+//        System.out.println(jump(new int[]{3,2,1}));
     }
 
 
@@ -36,7 +38,21 @@ public class JumpingGame {
      * 空间复杂度就是 O（1）
      */
     public static boolean canJump(int[] nums) {
-
+        // 这个循环长度是length - 1很有趣，虽然是我写出来，可是我现在才发现这里的乐趣
+        for (int i = 0; i < nums.length - 1; i++) {
+            int num = i - 1;
+            if (nums[i] == 0) {
+                for (int i1 = 0; i1 < i; i1++) {
+                    if (nums[num] > i - num) {
+                        break;
+                    }
+                    num --;
+                }
+                if (num < 0) {
+                   return false;
+                }
+            }
+        }
         return true;
     }
 
