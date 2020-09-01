@@ -1,4 +1,4 @@
-package com.wz.september.time1.a1;
+package com.wz.september.time3.a1;
 
 public class Palindrome {
     /**
@@ -42,17 +42,8 @@ public class Palindrome {
      * 空间复杂度O（1）
      */
     public static boolean isPalindrome(int x) {
-        if (x <= 0 || (x % 10 == 0 && x != 0)) {
-            return false;
-        }
-        int temp = x % 10;
-        x /= 10;
-        while (temp < x) {
-            temp *= 10;
-            temp += x % 10;
-            x /= 10;
-        }
-        return temp == x || temp / 10 == x;
+
+        return false;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.wz.september.time1.a1;
+package com.wz.september.time2.a1;
 
 public class Palindrome {
     /**
@@ -34,25 +34,20 @@ public class Palindrome {
     }
 
     /**
-     * 反转一半的解法
-     * 这种解法我倒是没有想到，原因是不知道如何保存一半，这个想法巧妙，每次除以10，将余数保留，
-     * 每次乘以10相加，当原数字小于等于反转数字，结束循环，这个时候分为奇数和偶数两种情况，
-     * 偶数直接比较，奇数将反转数字除以10比较。
+     * 反转一半的解法(有趣的解法)
      * 时间复杂度O（n）
      * 空间复杂度O（1）
      */
     public static boolean isPalindrome(int x) {
-        if (x <= 0 || (x % 10 == 0 && x != 0)) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
             return false;
         }
-        int temp = x % 10;
-        x /= 10;
-        while (temp < x) {
-            temp *= 10;
-            temp += x % 10;
+        int palindrome = 0;
+        while (palindrome < x) {
+            palindrome = palindrome * 10 + x % 10;
             x /= 10;
         }
-        return temp == x || temp / 10 == x;
+        return x == palindrome || x == palindrome / 10;
     }
 
     /**
