@@ -43,35 +43,24 @@ public class ChangeExchange {
      * 空间复杂度O（S）
      */
     public static int coinChange(int[] coins, int amount) {
-
-        return -1;
-    }
-
-    // 错误思路
-    /*public static int coinChange(int[] coins, int amount) {
-        int result = 0;
-        Arrays.sort(coins);
-        for (int i = coins.length - 1; i >= 0; i--) {
-            result = getResult(i, coins, amount);
-            if (result != -1) {
-                break;
+        if (coins == null || coins.length == 0) {
+            return -1;
+        }
+        int[] coinArr = new int[amount + 1];
+        Arrays.fill(coinArr, amount + 1);
+        // 表示需要coins里面的每个硬币至少几枚，最少的硬币数
+        // 比如说 1就是需要1枚1，2需要一枚2，3至少需要两个，
+        coinArr[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int i1 = 0; i1 < coins.length; i1++) {
+                // 防止越界
+                if (coins[i1] <= i) {
+                    coinArr[i] = Math.min(coinArr[i], coinArr[i - coins[i1]] + 1);
+                }
             }
         }
-
-        return result;
+        return coinArr[amount] > amount ? -1 : coinArr[amount];
     }
 
-    private static int getResult(int level, int[] coins, int amount) {
-        int result = 0;
-        for (int i = level; i >= 0; i--) {
-            int temp = amount / coins[i];
-            result +=  temp;
-            amount = amount - temp * coins[i];
-            if (amount == 0) {
-                break;
-            }
-        }
-        return amount == 0 ? result : -1;
-    }*/
 
 }
