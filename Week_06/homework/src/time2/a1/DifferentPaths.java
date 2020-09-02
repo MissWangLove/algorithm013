@@ -34,12 +34,26 @@ public class DifferentPaths {
 
     /**
      * 自顶向下考虑
+     * 时间复杂度就是 O(m * n)
+     * 空间复杂度为   O(m * n)
      */
     public static int uniquePaths(int m, int n) {
         if (m == 0 || n == 0) {
             return 1;
         }
+        int[][] paths = new int[m][n];
+        paths[m - 1][n - 1] = 1;
+        return getResult(0,0,m,n,paths);
+    }
 
-        return 1;
+    private static int getResult(int x, int y, int m, int n, int[][] paths) {
+        if (x == m - 1 || y == n -1) {
+            return 1;
+        }
+        if (paths[x][y] != 0) {
+            return paths[x][y];
+        }
+        paths[x][y] = getResult(x + 1, y, m, n, paths) + getResult(x, y + 1, m, n, paths);
+        return paths[x][y];
     }
 }
