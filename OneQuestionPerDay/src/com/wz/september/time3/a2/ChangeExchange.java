@@ -1,6 +1,4 @@
-package com.wz.september.time1.a2;
-
-import java.util.Arrays;
+package com.wz.september.time3.a2;
 
 public class ChangeExchange {
 
@@ -43,17 +41,8 @@ public class ChangeExchange {
      * 空间复杂度O（S）
      */
     public static int coinChange(int[] coins, int amount) {
-        int[] saveMin = new int[amount + 1];
-        Arrays.fill(saveMin, amount + 1);
-        saveMin[0] = 0;
-        for (int i = 1; i <= amount; i++) {
-            for (int i1 = 0; i1 < coins.length; i1++) {
-                if (coins[i1] <= i) {
-                    saveMin[i] = Math.min(saveMin[i], saveMin[i - coins[i1]] + 1);
-                }
-            }
-        }
-        return saveMin[amount] > amount ? -1 : saveMin[amount];
+
+        return -1;
     }
 
     // 错误思路
