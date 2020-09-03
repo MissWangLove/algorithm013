@@ -40,8 +40,23 @@ public class HouseRobbery {
      * 空间复杂度 O(1)
      */
     public static int rob(int[] nums) {
-
-        return 1;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        // first表示 n - 1的最大值
+        int first = nums[0];
+        // second表示 n 的最大值
+        int second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = second;
+            second = Math.max(nums[i] + first, second);
+            first = temp;
+        }
+        return second;
     }
 
 
