@@ -33,11 +33,32 @@ public class DifferentPaths {
     }
 
     /**
+     * 优化代码,逆向思维，其实就是递归的反写
+     * 时间复杂度和空间复杂度都是O（m * n）
+     */
+    public static int uniquePaths(int m, int n) {
+        if (m == 0 || n == 0) {
+            return 0;
+        }
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 1;
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+
+    /**
      * 自顶向下考虑
      * 时间复杂度就是 O(m * n)
      * 空间复杂度为   O(m * n)
      */
-    public static int uniquePaths(int m, int n) {
+    /*public static int uniquePaths(int m, int n) {
         if (m == 0 || n == 0) {
             return 1;
         }
@@ -55,5 +76,5 @@ public class DifferentPaths {
         }
         paths[x][y] = getResult(x + 1, y, m, n, paths) + getResult(x, y + 1, m, n, paths);
         return paths[x][y];
-    }
+    }*/
 }
