@@ -1,5 +1,7 @@
 package com.wz.september.time3.a2;
 
+import java.util.Arrays;
+
 public class ChangeExchange {
 
     /**
@@ -36,13 +38,27 @@ public class ChangeExchange {
     }
 
     /**
-     * 看了题解，也不是很明白，感觉自底向上的解法比较容易理解，所以这里就用这个方法试试，没看太懂，先抄把。
      * 时间复杂度O（Sn）
      * 空间复杂度O（S）
      */
     public static int coinChange(int[] coins, int amount) {
-
-        return -1;
+        if (coins == null || coins.length == 0) {
+            return 0;
+        }
+        // 状态数组
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount);
+        // 初始化值
+        dp[0] = 0;
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    // dp方程
+                    dp[i] = Math.min(dp[i - coins[j]] + 1, dp[i]);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
     }
 
     // 错误思路

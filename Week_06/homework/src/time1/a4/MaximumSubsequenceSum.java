@@ -23,8 +23,10 @@ public class MaximumSubsequenceSum {
      * 3. 状态方程： max = Math.max(max(i - 1) + f[i], f[i]);
      *
      * 状态方程错误，导致产生了错误的题解：
-     * max（i） = Math.max(pre（i）, max（i - 1）);
+     * max（i） = Math.max(pre（i）+ f[i], max（i - 1）);
      * pre表示当前层计算的和，max表示上一层所求的最大子序列和。保留当前层的计算结果很重要。在下一层的时候要使用
+     *
+     * 最大子序列和 = 当前元素自身最大或者包含之前最大后最大
      */
 
     public static int maxSubArray(int[] nums) {
