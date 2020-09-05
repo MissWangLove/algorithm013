@@ -1,5 +1,8 @@
 package com.wz.september.time2.a5;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TriangleMinimumPathSum {
@@ -47,10 +50,39 @@ public class TriangleMinimumPathSum {
      * 时间复杂度为 O（n*n）
      * 这样话的 空间复杂度就是O（n）
      */
-    public int minimumTotal(List<List<Integer>> triangle) {
+    /*public int minimumTotal(List<List<Integer>> triangle) {
+        int m = triangle.size();
+        // 为什么申请 m + 1个空间？因为在计算dp[m - 1]的时候需要使用到dp[m]
+        int[] dp = new int[m + 1];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0];
+    }*/
 
-        return 0;
+    /**
+     * 二维数组的写法
+     */
+    public static int minimumTotal(List<List<Integer>> triangle) {
+        int m = triangle.size();
+        int[][] dp = new int[m + 1][m + 1];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0][0];
     }
 
+    public static void main(String[] args) {
+        List<List<Integer>> lists = new ArrayList<>();
+        lists.add(Arrays.asList(2));
+        lists.add(Arrays.asList(3,4));
+        lists.add(Arrays.asList(6,5,7));
+        lists.add(Arrays.asList(4,1,8,3));
+        System.out.println(minimumTotal(lists));
+    }
 
 }
