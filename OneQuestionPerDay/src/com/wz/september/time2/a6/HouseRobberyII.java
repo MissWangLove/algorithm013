@@ -53,8 +53,26 @@ public class HouseRobberyII {
     }*/
 
     public static int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        return Math.max(getResult(Arrays.copyOfRange(nums, 0, nums.length - 1)), getResult(Arrays.copyOfRange(nums, 1, nums.length)));
+    }
 
-        return 0;
+    private static int getResult(int[] nums) {
+        // n - 2
+        int pre = 0;
+        // n - 1
+        int cur = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int temp = cur;
+            cur = Math.max(pre + nums[i], cur);
+            pre = temp;
+        }
+        return cur;
     }
 
 
