@@ -34,12 +34,30 @@ public class DifferentPaths {
 
     /**
      * 自顶向下考虑
+     * 使用dp来写，并且看了下第二次做的，三次分别使用了不同的写法
+     * 第一天使用了递归
+     * 第二遍逆写dp
+     * 第三遍使用dp公式来写，但是从代码的简介程度来看 第二遍的代码量似乎更好
+     * 第三遍的代码看起来更加清晰明了
+     * 时间复杂度和空间复杂度都是 O(m * n)
      */
     public static int uniquePaths(int m, int n) {
         if (m == 0 || n == 0) {
             return 1;
         }
-
-        return 1;
+        int[][] dp = new int[m][n];
+        // 初始值
+        for (int i = 0; i < m; i++) {
+            dp[i][n - 1] = 1;
+        }
+        for (int i = 0; i < n; i++) {
+            dp[m - 1][i] = 1;
+        }
+        for (int i = m - 2; i >= 0; i--) {
+            for (int j = n - 2; j >= 0; j--) {
+                dp[i][j] = dp[i + 1][j] + dp[i][j + 1];
+            }
+        }
+        return dp[0][0];
     }
 }
