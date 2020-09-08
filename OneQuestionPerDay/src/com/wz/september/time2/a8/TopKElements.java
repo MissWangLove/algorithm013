@@ -40,8 +40,21 @@ public class TopKElements {
      * O(n * log n)
      */
     public static int[] topKFrequent(int[] nums, int k) {
-
-        return null;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
+            list.add(integerIntegerEntry);
+        }
+        Collections.sort(list, Comparator.comparingInt(Map.Entry::getValue));
+        int[] result = new int[k];
+        int len = 0;
+        while (len < k) {
+            result[len ++] = list.get(list.size() - len).getKey();
+        }
+        return result;
     }
 
     /// 小顶堆
