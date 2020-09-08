@@ -35,6 +35,12 @@ public class Combination {
         }
     }
 
+    /**
+     * 组合
+     * 这个时间复杂度和空间复杂度分析我就不是很会了
+     *  时间复杂度是 有点搞不懂
+     * 空间复杂度就是 O(C n k), 底 n， n里面取k个，无序
+     */
     public static List<List<Integer>> combine(int n, int k) {
         getResult(1, n, k, new LinkedList<>());
         return result;
