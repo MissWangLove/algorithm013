@@ -24,8 +24,8 @@ public class Combination {
      */
 
     public static void main(String[] args) {
-//        List<List<Integer>> combine = combine(4, 2);
-        List<List<Integer>> combine = combine(1, 1);
+        List<List<Integer>> combine = combine(4, 2);
+        //List<List<Integer>> combine = combine(1, 1);
         for (List<Integer> list : combine) {
             for (int i = 0; i < list.size(); i++) {
                 System.out.print(list.get(i) + ", ");
@@ -34,8 +34,25 @@ public class Combination {
         }
     }
 
+    /**
+     * 继续做，一个题做上十几遍
+     */
+    static List<List<Integer>> result = new ArrayList<>();
     public static List<List<Integer>> combine(int n, int k) {
-        return null;
+        getLevel(1, n, k, new LinkedList<>());
+        return result;
+    }
+
+    private static void getLevel(int level, int n, int k, LinkedList<Integer> list) {
+        if (list.size() == k) {
+            result.add(new ArrayList<>(list));
+            return ;
+        }
+        for (int i = level; i <= n; i++) {
+            list.add(i);
+            getLevel(i + 1, n, k, list);
+            list.removeLast();
+        }
     }
 
 
