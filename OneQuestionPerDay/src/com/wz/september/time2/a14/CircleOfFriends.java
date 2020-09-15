@@ -1,5 +1,8 @@
 package com.wz.september.time2.a14;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class CircleOfFriends {
     /**
      * 朋友圈
@@ -33,11 +36,78 @@ public class CircleOfFriends {
      */
 
     /**
-     *
+     * 其实就是利用数组组成无向图，然后看有多少个无向图。
      */
 
-    public int findCircleNum(int[][] M) {
+    public static int findCircleNum(int[][] M) {
+        int[] visited = new int[M.length];
+        int count = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        // 先抓住一个完了再说
+        for (int i = 0; i < M.length; i++) {
+            queue.add(i);
+            if (visited[i] == 0) {
+                // while循环保证将所有相关的结点全部找到。
+                while (!queue.isEmpty()) {
+                    Integer remove = queue.remove();
+                    for (int j = 0; j < M.length; j++) {
+                        if (M[remove][j] == 1 && visited[j] == 0) {
+                            visited[j] = 1;
+                            queue.add(j);
+                        }
+                    }
+                }
+                count ++;
+            }
+        }
 
-        return 0;
+        return count;
+    }
+
+    /*public static int findCircleNum(int[][] M) {
+        int[] visited = new int[M.length];
+        int count = 0;
+        for (int i = 0; i < M.length; i++) {
+            if (visited[i] == 0) {
+                dfs(i, M, visited);
+                count ++;
+            }
+        }
+        return count;
+    }
+
+    private static void dfs(int i, int[][] m, int[] visited) {
+        for (int j = 0; j < m.length; j++) {
+            if (m[i][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;
+                dfs(j, m, visited);
+            }
+        }
+    }*/
+
+    public static void main(String[] args) {
+        System.out.println(findCircleNum(new int[][]{
+                {1,1,0},
+                {1,1,0},
+                {0,0,1}
+        }));
+        System.out.println(findCircleNum(new int[][]{
+                {1,0,0,1},
+                {0,1,1,0},
+                {0,1,1,1},
+                {1,0,1,1}
+        }));
+        System.out.println(findCircleNum(new int[][]{
+                {1,1,0,0},
+                {1,1,1,0},
+                {0,1,1,1},
+                {0,0,1,1}
+        }));
+        System.out.println(findCircleNum(new int[][]{
+                {1,1,0,0},
+                {1,1,0,0},
+                {0,0,1,1},
+                {0,0,1,1}
+        }));
     }
 }
