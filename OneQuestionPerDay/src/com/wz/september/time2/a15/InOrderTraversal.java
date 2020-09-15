@@ -31,12 +31,37 @@ public class InOrderTraversal {
     /**
      * 这个迭代写法还是不熟悉，还得练。总的思路就是先把所有的左结点（包括根结点）先放入到栈中，然后取出最后一个，开始遍历他的右结点。如此如此。
      */
-    public List<Integer> inorderTraversal(TreeNode root) {
+    /*public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-
+        // 使用栈结构，先将左结点插入到栈中，左右的左子树的左结点插入完成之后出栈遍历右结点
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            result.add(pop.val);
+            root = pop.right;
+        }
         return result;
+    }*/
+
+    // 递归的写法
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        getResult(root, list);
+        return list;
     }
 
+    private void getResult(TreeNode root, List<Integer> list) {
+        if (root == null) {
+            return ;
+        }
+        getResult(root.left, list);
+        list.add(root.val);
+        getResult(root.right, list);
+    }
 
 
 }
