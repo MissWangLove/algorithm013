@@ -18,9 +18,31 @@ public class EffectivePerfectSquare {
      * 输出：False
      */
 
+    /**
+     * 直接二分查找，注意long类型
+     */
+
 
     public static boolean isPerfectSquare(int num) {
-
+        if (num < 2) {
+            return true;
+        }
+        long left = 2,
+                right = num / 2,
+                middle,
+                square;
+        while (left <= right) {
+            middle = left + (right - left) / 2;
+            square = middle * middle;
+            if (square == num) {
+                return true;
+            }
+            if (square > num) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
         return false;
     }
 
