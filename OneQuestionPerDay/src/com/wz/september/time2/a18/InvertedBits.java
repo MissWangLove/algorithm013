@@ -38,11 +38,15 @@ public class InvertedBits {
     }
 
     /**
-     * 直接反转
+     * 直接反转，二进制反转其实就是左移右移
      * 时间复杂度和空间复杂度都是 O(1)
      */
     public static int reverseBits(int n) {
-
-        return 0;
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            res = (res << 1) + (n & 1);
+            n >>= 1;
+        }
+        return res;
     }
 }

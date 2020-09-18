@@ -1,5 +1,11 @@
 package com.wz.september.time2.a17;
 
+import sun.reflect.generics.tree.Tree;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class FlipBinaryTree {
 
     /**
@@ -28,14 +34,45 @@ public class FlipBinaryTree {
      */
 
 
+    /**
+     * 递归的写法
+     */
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
 
     /**
      * 递归的写法，时间复杂度是O(n)
      * 这个算上调用栈也是o(n)的
      */
-    public static TreeNode invertTree(TreeNode root) {
+    /*public static TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            TreeNode treeNode = deque.pollFirst();
+            TreeNode left = treeNode.left;
+            TreeNode right = treeNode.right;
+            treeNode.right = left;
+            treeNode.left = right;
+            if (treeNode.left != null) {
+                deque.add(treeNode.left);
+            }
+            if (treeNode.right != null) {
+                deque.add(treeNode.right);
+            }
+        }
         return root;
-    }
+    }*/
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(4);
