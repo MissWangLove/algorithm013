@@ -6,3 +6,15 @@
 不同的替换的算法，比方说还有LFU等等。实现就是HashTable + 双向链表，实现可以自己手动来写数据结构来实现，也可以利用语言内置的数据结构来实现，
 以Java为例，就用LinkedHashMap来实现，他的查询、删除、更新的时间复杂度都是O（1）的。更新原则就是最长时间没有使用的移除，不同的替换算法就是
 更新原则不同
+
+#### 排序
+
+
+
+
+#### homework
+
+作业链接 ：https://github.com/WangZhiLove/algorithm013/blob/master/Week_08/homework/README.md
+
+每日一题链接 ： https://github.com/WangZhiLove/algorithm013/blob/master/OneQuestionPerDay/src/com/wz/september/readme.md
+
