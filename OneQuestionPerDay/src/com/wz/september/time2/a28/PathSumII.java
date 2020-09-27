@@ -1,6 +1,6 @@
 package com.wz.september.time2.a28;
 
-import java.util.List;
+import java.util.*;
 
 public class PathSumII {
 
@@ -29,10 +29,75 @@ public class PathSumII {
      * ]
      */
 
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
 
-        return null;
+    // 存储路径
+    Map<TreeNode, TreeNode> pathMap = new HashMap<>();
+    // 存储路径和
+    LinkedList<Integer> sumLinkedList = new LinkedList<>();
+
+    /**
+     * 广度遍历
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return result;
+        }
+        sumLinkedList.add(0);
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        linkedList.add(root);
+        while (!linkedList.isEmpty()) {
+            TreeNode treeNode = linkedList.pollLast();
+            int tempSum = sumLinkedList.pollLast() + treeNode.val;
+            if (tempSum == sum && treeNode.left == null && treeNode.right == null) {
+                getPath(treeNode);
+            }
+            if (treeNode.left != null) {
+                linkedList.add(treeNode.left);
+                sumLinkedList.add(tempSum);
+                pathMap.put(treeNode.left, treeNode);
+            }
+            if (treeNode.right != null) {
+                linkedList.add(treeNode.right);
+                sumLinkedList.add(tempSum);
+                pathMap.put(treeNode.right, treeNode);
+            }
+        }
+        return result;
     }
+
+
+    private void getPath(TreeNode node) {
+        LinkedList<Integer> temp = new LinkedList<>();
+        while (node != null) {
+            temp.addFirst(node.val);
+            node = pathMap.get(node);
+        }
+        result.add(new ArrayList<>(temp));
+    }
+    /**
+     * 递归的写法
+     * 时间复杂度为 O(n ^ 2)
+     * 空间复杂度为 O(n)
+     */
+    List<List<Integer>> result = new ArrayList<>();
+    /*public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        bfs(root, sum, new LinkedList<Integer>());
+        return result;
+    }
+
+    private void bfs(TreeNode root, int sum, LinkedList<Integer> linkedList) {
+        if (root == null) {
+            return ;
+        }
+        sum -= root.val;
+        linkedList.add(root.val);
+        if (root.left == null && root.right == null && sum == 0) {
+            result.add(new ArrayList<>(linkedList));
+        }
+        bfs(root.left, sum, linkedList);
+        bfs(root.right, sum, linkedList);
+        linkedList.pollLast();
+    }*/
 
 }
 
