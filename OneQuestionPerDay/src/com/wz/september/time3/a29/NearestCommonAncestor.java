@@ -36,6 +36,8 @@ public class NearestCommonAncestor {
      *  1. 两个目标节点的任意一个等于当前遍历节点，当前遍历节点就是最近公共祖先
      *  2. 两个节点一个大于当前节点，一个小于当前节点，当前节点就是最近公共祖先
      *  递归判断就好
+     *  时间复杂度为 O(n)
+     *  空间复杂度为 O(1)
      */
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
